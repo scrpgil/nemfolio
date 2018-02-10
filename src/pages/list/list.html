@@ -1,0 +1,33 @@
+<ion-content>
+  <div class="nem-logo">
+    <button ion-button clear full (click)="setRootPage('home')">
+      <img src="assets/imgs/logo.png"/>
+    </button>
+  </div>
+  <ion-list *ngIf="address">
+    <ng-container *ngIf="address.current.address != ''">
+      <ng-container *ngFor="let l of address.lists;let idx = index;">
+        <button ion-item (click)="setCurrentAddreess(l)">
+          <ng-container *ngIf="address.current.address == l.address">
+            <strong>{{l.address}}</strong>
+          </ng-container>
+          <ng-container *ngIf="address.current.address != l.address">
+            <p>{{l.address}}</p>
+          </ng-container>
+          <button ion-button clear icon-only [color]="address.current.address == l.address ? 'dark' : 'light'" item-end (click)="delAddress(l, idx)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </button>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="address.current.address == ''">
+      <button ion-item disabled>
+        未登録
+      </button>
+    </ng-container>
+    <button ion-item (click)="addAddress()">
+      <ion-icon name="add" item-start></ion-icon>
+        アドレスを追加する
+    </button>
+  </ion-list>
+</ion-content>

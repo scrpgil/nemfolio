@@ -1,0 +1,83 @@
+page-home {
+    .harvest, .account{
+        height:auto;
+        .title{
+            color:#666;
+            padding-left:16px;
+            font-weight: bold;
+        }
+        ion-item{
+            color:#666;
+        }
+        ion-label{
+            padding-top:0px;
+            margin-top:0px;
+        }
+    }
+    .harvesting_blocks{
+        table{
+            width:100%;
+            text-align: left;
+            th{
+                color:#666;
+            }
+            .table-header{
+                border-bottom:1px solid #ccc;
+            }
+            .table-row{
+                border-bottom:1px solid #eee;
+            }
+            td{
+                padding:5px 0px;
+                color:#666;
+            }
+            .fee{
+                font-weight: bold;
+                color:grey;
+            }
+        }
+    }
+    ion-col{
+        .card{
+            border-radius:3px;
+            box-shadow:0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            height:100%;
+            padding:10px 5px 5px;
+            margin:10px 5px 5px;
+            .card-header{
+                padding:5px 10px 10px;
+                font-size: 18px;
+            }
+            .card-content{
+                margin:10px 15px 5px;
+            }
+        }
+        .harvest, .main{
+            background-color: #5CA9E5;
+            .card-content{
+                .title, .fee{
+                    font-size: 18px;
+                    color:#fff;
+                }
+                .block, .state, .fee{
+                    margin-top:6px;
+                    padding-left:20px;
+                    padding-bottom:20px;
+                    font-size: 50px;
+                    color:#fff;
+                }
+                .block{
+                    padding-bottom:14px;
+                }
+                .state{
+                    font-size: 36px;
+                }
+                .date{
+                    color:#fff;
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}

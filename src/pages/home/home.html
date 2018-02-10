@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-navbar color="main">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>nemfolio（β）</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-sm-12 col-xs-12 col-md-4 class="harvest">
+        <div class="card main">
+          <div class="card-content">
+            <div class="title">総ハーベスト数</div>
+            <ng-container *ngIf="account && account.data">
+              <div class="block">{{account.data.account.harvestedBlocks}}</div>
+            </ng-container>
+            <ng-container *ngIf="account && account.harvesting_blocks">
+              <ng-container *ngIf="account.harvesting_blocks.data">
+                <ng-container *ngIf="account.harvesting_blocks.data.length > 0">
+                  <div class="title">最新の報酬<span class="date">({{account.harvesting_blocks.data[0].timeStamp | fmtNemDate | date:'yyyy-MM-dd HH:mm:ss':'+0900'}})</span></div>
+                  <div class="fee">
+                    <span>{{account.harvesting_blocks.data[0].totalFee / 1000000}}</span>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+            <!--
+            <ng-container *ngIf="account && account.data">
+              <div class="title">状態</div>
+              <div class="state">{{account.data.meta.remoteStatus}}</div>
+            </ng-container>
+            -->
+          </div>
+        </div>
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-xs-12 col-md-8>
+        <div class="card">
+          <div class="card-header">
+            直近25ブロックのハーベスト
+          </div>
+          <div class="card-content">
+            <canvas #barCanvas></canvas>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-sm-12 col-xs-12 col-md-6 class="account">
+        <div class="card">
+          <div class="card-header">
+            アカウント
+          </div>
+          <ng-container *ngIf="account && account.data">
+            <ion-list no-lines>
+              <div class="title">アドレス</div>
+              <ion-item>{{ account.data.account.address }}</ion-item>
+              <div class="title">バランス</div>
+              <ion-item>{{ (account.data.account.balance | fmtNemValue)[0]}}.{{ ((account.data.account.balance | fmtNemValue)[1]) | removezero}} XEM</ion-item>
+              <div class="title">重要度</div>
+              <ion-item>{{ (account.data.account.importance * 10000).toFixed(6)}}</ion-item>
+            </ion-list>
+          </ng-container>
+        </div>
+      </ion-col>
+      <ion-col col-12 col-sm-12 col-xs-12 col-md-6 class="harvesting_blocks">
+        <div class="card">
+          <div class="card-header">
+            ハーベストしたブロック
+          </div>
+          <div class="card-content">
+            <ng-container *ngIf="account && account.harvesting_blocks">
+              <table>
+                <tr class="table-header">
+                  <th>ブロック</th>
+                  <th>ハーベスト報酬</th>
+                </tr>
+                <ng-container *ngIf="account.harvesting_blocks.data">
+                  <ng-container *ngFor="let d of account.harvesting_blocks.data;let idx=index">
+                    <tr *ngIf="idx < 25" class="table-row">
+                      <td class="block">{{d.height}}</td>
+                      <td class="fee">
+                        <span>{{d.totalFee / 1000000}}</span>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </ng-container>
+              </table>
+            </ng-container>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
