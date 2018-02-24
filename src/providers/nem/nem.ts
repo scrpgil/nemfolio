@@ -11,7 +11,8 @@ export class NemProvider {
         //this.endpoint = nem.model.objects.create("endpoint")("https://shibuya.supernode.me:7891http://alice2.nem.ninja", nem.model.nodes.defaultPort);
         // httpsのノードは数少ない・・・
         //this.endpoint = nem.model.objects.create("endpoint")("https://shibuya.supernode.me", 7891);
-        this.endpoint = nem.model.objects.create("endpoint")("https://transfer.nemfolio.net", 443);
+        //this.endpoint = nem.model.objects.create("endpoint")("https://transfer.nemfolio.net", 443);
+        this.endpoint = nem.model.objects.create("endpoint")("https://shibuya.supernode.me", 7891);
         //this.endpoint = nem.model.objects.create("endpoint")("http://localhost", 8080);
         console.log('Hello NemProvider Provider');
     }
